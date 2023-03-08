@@ -8,7 +8,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class EmployeeService {
-    public static Specification<Employee> getService(String firstName, String lastName, String emailId, String jobPosition){
+    public static Specification<Employee> getService(String firstName, String lastName, String emailId, String jobPosition, String searchString){
         return ((root, query, criteriaBuilder) -> {
             List<Predicate> predicates = new ArrayList<>();
 
@@ -27,6 +27,16 @@ public class EmployeeService {
             if (jobPosition != null) {
                 predicates.add(criteriaBuilder.like(root.get("jobPosition"), "%" + jobPosition + "%"));
             }
+
+            if(searchString !=null){
+                predicates.add(criteriaBuilder.like(root.get("firstName"), "%" + searchString + "%"));
+                predicates.add(criteriaBuilder.like(root.get("lastName"), "%" + searchString + "%"));
+                predicates.add(criteriaBuilder.like(root.get("emailId"), "%" + searchString + "%"));
+                predicates.add(criteriaBuilder.like(root.get("jobPosition"), "%" + searchString + "%"));
+                // use the OR operator to combine all predicates
+                return criteriaBuilder.or(predicates.toArray(new Predicate[predicates.size()]));
+            }
+
             return criteriaBuilder.and(predicates.toArray(new Predicate[0]));
 
         });

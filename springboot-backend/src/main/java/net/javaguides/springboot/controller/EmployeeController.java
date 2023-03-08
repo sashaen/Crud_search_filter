@@ -66,8 +66,9 @@ public class EmployeeController {
     public List<Employee> list( @RequestParam(value = "firstName", required = false)String firstName,
                                 @RequestParam(value = "lastName", required = false)String lastName,
                                 @RequestParam(value = "emailId", required = false)String emailId,
-                                @RequestParam(value = "jobPosition", required = false)String jobPosition){
-        Specification<Employee> specification = EmployeeService.getService(firstName, lastName, emailId, jobPosition);
+                                @RequestParam(value = "jobPosition", required = false)String jobPosition,
+                                @RequestParam(value = "search", required = false) String searchstring){
+        Specification<Employee> specification = EmployeeService.getService(firstName, lastName, emailId, jobPosition, searchstring);
         return employeeRepository.findAll(specification);
    }
 }
