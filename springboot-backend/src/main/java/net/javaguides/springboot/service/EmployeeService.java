@@ -36,7 +36,6 @@ public class EmployeeService {
                 // use the OR operator to combine all predicates
                 return criteriaBuilder.or(predicates.toArray(new Predicate[predicates.size()]));
             }
-
             return criteriaBuilder.and(predicates.toArray(new Predicate[0]));
 
         });

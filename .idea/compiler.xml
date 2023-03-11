@@ -11,7 +11,7 @@
       </profile>
     </annotationProcessing>
     <bytecodeTargetLevel>
-      <module name="springboot-backend" target="17" />
+      <module name="springboot-backend" target="19" />
     </bytecodeTargetLevel>
   </component>
   <component name="JavacSettings">
