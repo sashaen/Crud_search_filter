@@ -33,21 +33,21 @@ public class EmployeeController {
         return employeeRepository.findAll(specification);
     }
     @PostMapping
-    public Employee createEmployee(@RequestBody Employee employee,  @RequestHeader("x-query") String xQueryHeader){
+    public Employee createEmployee(@RequestBody Employee employee){
 
         return employeeRepository.save(employee);
     }
 
     //build get employee by rest api
     @GetMapping("{id}")
-    public ResponseEntity<Employee> getEmployeeById( @PathVariable Long id, @RequestHeader("x-query") String xQueryHeader){
+    public ResponseEntity<Employee> getEmployeeById( @PathVariable Long id){
        Employee employee = employeeRepository.findById(id).orElseThrow(() -> new ResourceNotFoundException("Employee not exist with id: " + id));
        return ResponseEntity.ok(employee);
     }
 
     //build update employee rest api
     @PutMapping("{id}")
-    public ResponseEntity<Employee> updateEmployee( @PathVariable Long id, @RequestBody Employee employeeDetails, @RequestHeader("x-query") String xQueryHeader){
+    public ResponseEntity<Employee> updateEmployee( @PathVariable Long id, @RequestBody Employee employeeDetails){
        Employee updateEmployee = employeeRepository.findById(id).orElseThrow( ()-> new ResourceNotFoundException("Employee not exist with id: " + id));
        updateEmployee.setFirstName(employeeDetails.getFirstName());
        updateEmployee.setLastName(employeeDetails.getLastName());
@@ -61,7 +61,7 @@ public class EmployeeController {
 
     // build delete employee rest api
     @DeleteMapping("{id}")
-    public ResponseEntity<HttpStatus> deleteEmployee( @PathVariable Long id, @RequestHeader("x-query") String xQueryHeader){
+    public ResponseEntity<HttpStatus> deleteEmployee( @PathVariable Long id){
        Employee employee = employeeRepository.findById(id).orElseThrow(()-> new ResourceNotFoundException("Employee not found with id:" + id));
 
        employeeRepository.delete(employee);
