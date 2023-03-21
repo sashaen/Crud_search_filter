@@ -14,6 +14,19 @@ import javax.servlet.http.HttpServletRequest;
 @Entity
 @Table(name = "employees")
 
+@NamedStoredProcedureQuery(
+        name = "employee.details",
+        procedureName = "getEmployeeDetailsById",
+        parameters = {
+                @StoredProcedureParameter(mode = ParameterMode.IN, name = "emp_id", type = Integer.class),
+                @StoredProcedureParameter(mode = ParameterMode.OUT, name = "emp_firstname", type = String.class),
+                @StoredProcedureParameter(mode = ParameterMode.OUT, name = "emp_lastname", type = String.class),
+                @StoredProcedureParameter(mode = ParameterMode.OUT, name = "emp_emailid", type = String.class),
+                @StoredProcedureParameter(mode = ParameterMode.OUT, name = "emp_jobposition", type = String.class)
+
+        }
+
+)
 public class Employee {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)

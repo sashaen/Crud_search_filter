@@ -14,12 +14,16 @@ import org.springframework.web.bind.annotation.*;
 import javax.persistence.criteria.Predicate;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
 
 @RestController
 @RequestMapping("/api/v1/employees")
 public class EmployeeController {
     @Autowired
     private EmployeeRepository employeeRepository;
+    @Autowired
+    private EmployeeService employeeService ;
+
     // build create employee rest api and request body converts json into java obj and search and filter functionality
     @GetMapping
     public List<Employee> list( @RequestParam(value = "firstName", required = false)String firstName,
@@ -68,5 +72,18 @@ public class EmployeeController {
 
        return new ResponseEntity<>(HttpStatus.NO_CONTENT);
     }
+    @RequestMapping("/detailsById/{id}")
+    public Map<String,Object> fetchEmployeeDetailsByIdProcedure( @PathVariable Integer id){
+        return employeeService.fetchEmployeeDetailsByIdProcedure(id);
+    }
 
+    @RequestMapping("/empCount")
+    public String fetchEmployeeCountProcedure(){
+        return employeeService.fetchEmployeeCountProcedure();
+    }
+
+    @RequestMapping("/emailId/{id}")
+    public String fetchEmployeeEmailIdProcedure(@PathVariable Integer id){
+        return employeeService.fetchEmployeeEmailIdProcedure(id);
+    }
 }

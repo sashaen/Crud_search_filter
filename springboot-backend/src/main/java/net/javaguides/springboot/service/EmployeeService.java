@@ -1,13 +1,20 @@
 package net.javaguides.springboot.service;
 
 import net.javaguides.springboot.model.Employee;
+import net.javaguides.springboot.repository.EmployeeRepository;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.jpa.domain.Specification;
+import org.springframework.stereotype.Component;
+import org.springframework.web.bind.annotation.PathVariable;
 
 import javax.persistence.criteria.Predicate;
 import java.util.ArrayList;
 import java.util.List;
-
+import java.util.Map;
+@Component
 public class EmployeeService {
+    @Autowired
+    private EmployeeRepository employeeRepository;
     public static Specification<Employee> getService(String firstName, String lastName, String emailId, String jobPosition, String searchString){
         return ((root, query, criteriaBuilder) -> {
             List<Predicate> predicates = new ArrayList<>();
@@ -40,4 +47,17 @@ public class EmployeeService {
 
         });
     }
+
+    public Map<String, Object> fetchEmployeeDetailsByIdProcedure( Integer id){
+        return employeeRepository.fetchEmployeeDetailsByIdProcedure(id);
+    }
+
+    public String fetchEmployeeCountProcedure(){
+        return employeeRepository.fetchEmployeeCountProcedure();
+    }
+
+    public  String fetchEmployeeEmailIdProcedure(@PathVariable Integer id){
+        return employeeRepository.fetchEmployeeEmailIdProcedure(id);
+    }
+
 }
