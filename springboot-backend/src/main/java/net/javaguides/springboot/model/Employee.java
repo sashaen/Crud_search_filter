@@ -1,6 +1,7 @@
 package net.javaguides.springboot.model;
 
 import lombok.*;
+import org.hibernate.annotations.Formula;
 import org.springframework.web.context.request.RequestContextHolder;
 import org.springframework.web.context.request.ServletRequestAttributes;
 
@@ -27,6 +28,7 @@ import javax.servlet.http.HttpServletRequest;
         }
 
 )
+
 public class Employee {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -36,6 +38,7 @@ public class Employee {
     @Column(name = "Last_name")
     private String lastName;
     @Column(name = "email_id")
+    @Formula("getEmployeeEmailByName(first_name, last_name)")
     private String emailId;
 
     @Column(name = "job_position")

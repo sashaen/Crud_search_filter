@@ -5,7 +5,9 @@ import net.javaguides.springboot.repository.EmployeeRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.jpa.domain.Specification;
 import org.springframework.stereotype.Component;
+import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.RequestParam;
 
 import javax.persistence.criteria.Predicate;
 import java.util.ArrayList;
@@ -58,6 +60,15 @@ public class EmployeeService {
 
     public  String fetchEmployeeEmailIdProcedure(@PathVariable Integer id){
         return employeeRepository.fetchEmployeeEmailIdProcedure(id);
+    }
+
+//    public String fetchEmployeeEmail(@RequestParam String firstName, @RequestParam String lastName) {
+//        return employeeRepository.fetchEmployeeEmail(firstName, lastName);
+//    }
+
+    @Transactional
+    public Integer fetchOneJobCount( @PathVariable String job_position){
+        return employeeRepository.fetchOneJobCount(job_position);
     }
 
 }

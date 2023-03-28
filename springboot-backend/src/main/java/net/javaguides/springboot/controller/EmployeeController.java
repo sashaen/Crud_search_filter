@@ -86,4 +86,19 @@ public class EmployeeController {
     public String fetchEmployeeEmailIdProcedure(@PathVariable Integer id){
         return employeeService.fetchEmployeeEmailIdProcedure(id);
     }
+
+    @RequestMapping("/one-job-count/{jobPosition}")
+    public Integer fetchOneJobCount( @PathVariable String  jobPosition){
+        System.out.println(jobPosition);
+        return employeeService.fetchOneJobCount( jobPosition);
+    }
+
+
+//    @RequestMapping(value = "/get-email", method = RequestMethod.GET)
+//    public String getEmployeeEmail(@RequestParam String firstName, @RequestParam String lastName) {
+//        String email = employeeRepository.fetchEmployeeEmail(firstName, lastName);
+//        return email;
+//    }
+
+
 }

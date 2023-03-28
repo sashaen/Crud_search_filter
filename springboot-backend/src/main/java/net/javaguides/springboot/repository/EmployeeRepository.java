@@ -1,13 +1,18 @@
 package net.javaguides.springboot.repository;
 import net.javaguides.springboot.model.Employee;
+import org.hibernate.annotations.Formula;
 import org.springframework.data.jpa.domain.Specification;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.JpaSpecificationExecutor;
 import org.springframework.data.jpa.repository.query.Procedure;
+import org.springframework.stereotype.Component;
+import org.springframework.stereotype.Repository;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 import java.util.Map;
 
+@Repository
 public interface EmployeeRepository extends JpaRepository<Employee, Long>, JpaSpecificationExecutor<Employee> {
     // all crud database methods
 
@@ -18,5 +23,11 @@ public interface EmployeeRepository extends JpaRepository<Employee, Long>, JpaSp
     public String fetchEmployeeCountProcedure();
     @Procedure(value = "get_emailId_of_employee")
     public String fetchEmployeeEmailIdProcedure(Integer id);
+
+    @Procedure(value = "getCountOfOneJob")
+    public Integer fetchOneJobCount(String job_position);
+
+//    @Formula( value = "getEmployeeEmailByName")
+//    public String fetchEmployeeEmail(String firstname, String lastname);
 
 }
