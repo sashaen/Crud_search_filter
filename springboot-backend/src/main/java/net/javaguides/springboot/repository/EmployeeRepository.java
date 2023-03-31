@@ -1,5 +1,6 @@
 package net.javaguides.springboot.repository;
 import net.javaguides.springboot.model.Employee;
+import org.hibernate.Interceptor;
 import org.hibernate.annotations.Formula;
 import org.springframework.data.jpa.domain.Specification;
 import org.springframework.data.jpa.repository.JpaRepository;
@@ -26,6 +27,12 @@ public interface EmployeeRepository extends JpaRepository<Employee, Long>, JpaSp
 
     @Procedure(value = "getCountOfOneJob")
     public Integer fetchOneJobCount(String job_position);
+
+    @Procedure(value = "getEmployeeFullNameByIdSP")
+    public String fetchEmployeeFullname(Integer id);
+
+    @Procedure (value = "getEmaildomain")
+    public String fetchEmailDomain( Integer id);
 
 //    @Formula( value = "getEmployeeEmailByName")
 //    public String fetchEmployeeEmail(String firstname, String lastname);

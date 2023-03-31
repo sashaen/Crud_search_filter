@@ -9,6 +9,7 @@ import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestParam;
 
+import javax.persistence.criteria.CriteriaBuilder;
 import javax.persistence.criteria.Predicate;
 import java.util.ArrayList;
 import java.util.List;
@@ -69,6 +70,14 @@ public class EmployeeService {
     @Transactional
     public Integer fetchOneJobCount( @PathVariable String job_position){
         return employeeRepository.fetchOneJobCount(job_position);
+    }
+
+    public String fetchEmployeeFullname (@PathVariable Integer id){
+        return employeeRepository.fetchEmployeeFullname( id);
+    }
+
+    public String fetchEmailDomain (@PathVariable Integer id){
+        return employeeRepository.fetchEmailDomain(id);
     }
 
 }
